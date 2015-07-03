@@ -1,7 +1,19 @@
 package net.iveiculos.iveiculos.service;
 
+import net.iveiculos.iveiculos.builder.LojaBuilder;
 import net.iveiculos.iveiculos.builder.MarcaBuilder;
+import net.iveiculos.iveiculos.builder.ModeloBuilder;
+import net.iveiculos.iveiculos.builder.VersaoBuilder;
+import net.iveiculos.iveiculos.model.Cambio;
+import net.iveiculos.iveiculos.model.Categoria;
+import net.iveiculos.iveiculos.model.Combustivel;
+import net.iveiculos.iveiculos.model.Cor;
+import net.iveiculos.iveiculos.model.Loja;
 import net.iveiculos.iveiculos.model.Marca;
+import net.iveiculos.iveiculos.model.Modelo;
+import net.iveiculos.iveiculos.model.Opcional;
+import net.iveiculos.iveiculos.model.Subcategoria;
+import net.iveiculos.iveiculos.model.Versao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +23,24 @@ public class _CriarBaseService {
 
 	@Autowired
 	private MarcaService marcaService;
+	@Autowired
+	private CategoriaService categoriaService;
+	@Autowired
+	private SubcategoriaService subcategoriaService;
+	@Autowired
+	private ModeloService modeloService;
+	@Autowired
+	private CambioService cambioService;
+	@Autowired
+	private CombustivelService combustivelService;
+	@Autowired
+	private VersaoService versaoService;
+	@Autowired
+	private CorService corService;
+	@Autowired
+	private LojaService lojaService;
+	@Autowired
+	private OpcionalService opcionalService;
 	
 	// Marca
 	public static final String FERRARI = "Ferrari";
@@ -157,7 +187,65 @@ public class _CriarBaseService {
 		this.getMarcaOuCria(JAGUAR);
 		Marca landRover = this.getMarcaOuCria(LAND_ROVER);
 		this.getMarcaOuCria(VOLVO);
-		this.getMarcaOuCria(JAC);		
+		this.getMarcaOuCria(JAC);	
+		// Categorias
+		Categoria hatch = this.getCategoriaOuCria(HATCH);
+		Categoria sedan = this.getCategoriaOuCria(SEDAN);
+		Categoria sw = this.getCategoriaOuCria(SW);
+		Categoria van = this.getCategoriaOuCria(VAN);
+		Categoria pickUp = this.getCategoriaOuCria(PICK_UP);
+		Categoria sport = this.getCategoriaOuCria(SPORT);
+		Categoria suv = this.getCategoriaOuCria(SUV);
+		this.getCategoriaOuCria(MOTO); 
+		this.getCategoriaOuCria(ONIBUS); 
+		this.getCategoriaOuCria(CAMINHAO); 		
+		// Subcategorias
+		Subcategoria popular = this.getSubcategoriaOuCria(POPULAR, hatch);
+		this.getSubcategoriaOuCria(HATCH_PEQUENO, hatch);
+		Subcategoria hatchMedio = this.getSubcategoriaOuCria(HATCH_MEDIO, hatch);
+		this.getSubcategoriaOuCria(HATCH_GRANDE, hatch);
+		this.getSubcategoriaOuCria(SEDAN_PEQUENO, sedan);
+		this.getSubcategoriaOuCria(SEDAN_COMPACTO, sedan);
+		this.getSubcategoriaOuCria(SEDAN_MEDIO, sedan);
+		this.getSubcategoriaOuCria(SEDAN_GRANDE, sedan);
+		this.getSubcategoriaOuCria(SW_MEDIO, sw);
+		this.getSubcategoriaOuCria(SW_GRANDE, sw);	
+		this.getSubcategoriaOuCria(MONOCAB, van);
+		this.getSubcategoriaOuCria(GRANDCAB, van);		
+		this.getSubcategoriaOuCria(PICK_UP_PEQUENO, pickUp);
+		this.getSubcategoriaOuCria(PICK_UP_GRANDE, pickUp);		
+		this.getSubcategoriaOuCria(SPORT, sport);		
+		Subcategoria miniSUV = this.getSubcategoriaOuCria(MINI_SUV, suv);	
+		Subcategoria crossoverSUV = this.getSubcategoriaOuCria(CROSSOVER_SUV, suv);
+		/* ********* subs ********* ???
+		 *   Fugoes, Monocab, Grandcab, Forgoes pequenos
+		 */		
+		// Modelos
+		Modelo volkswagemGol = this.getModeloOuCria(VOLKSWAGEM_GOL, volkswagem, popular);
+		this.getModeloOuCria(VOLKSWAGEM_UP, volkswagem, popular);
+		Modelo pegeout308 = this.getModeloOuCria(PEGEOUT_308, pegeout, hatchMedio);
+		Modelo fordEcosport = this.getModeloOuCria(FORD_ECOSPORT, ford, miniSUV);		
+		Modelo landRoverRangeRoverEvoque = this.getModeloOuCria(LAND_ROVER_RANGE_ROVER_EVOQUE, landRover, crossoverSUV);	
+		// Cambios
+		Cambio manual = this.getCambioOuCria(CAMBIO_MANUAL);
+		Cambio automatico = this.getCambioOuCria(CAMBIO_AUTOMATICO);	
+		// Combustiveis
+		Combustivel gasolina = this.getCombustivelOuCria(GASOLINA);
+		this.getCombustivelOuCria(ALCOOL);
+		this.getCombustivelOuCria(DIESEL);
+		Combustivel flex = this.getCombustivelOuCria(FLEX);		
+		// Versoes
+		this.getVersaoOuCria(PEGEOUT_308_QUIKSILVER, 1.8f, 2015, 2015, 4, pegeout308, flex, automatico);	
+		this.getVersaoOuCria(VOLKSWAGEM_GOL_TEC, 1.0f, 2013, 2014, 4, volkswagemGol, flex, automatico);	
+		this.getVersaoOuCria(FORD_ECOSPORT_FREESTYLE_16V, 1.6f, 2014, 2014, 4, fordEcosport, flex, manual);
+		this.getVersaoOuCria(_CriarBaseService.LAND_ROVER_RANGE_ROVER_EVOQUE_SI4_COUPE_PURE_TECH_PACK, 
+				  			 2.0f, 2015, 2015, 4, landRoverRangeRoverEvoque, gasolina, automatico);	
+		// Opcionais
+		this.getOpcionalOuCria(AR_CONDICIONADO);
+		this.getOpcionalOuCria(DIRECAO_HIDRAULICA); 
+		this.getOpcionalOuCria(VIDRO_ELETRICO);
+		this.getOpcionalOuCria(TRAVA_ELETRICA);
+		this.getOpcionalOuCria(AIR_BAG);			
 	}
 	
 	
@@ -175,6 +263,107 @@ public class _CriarBaseService {
 			this.marcaService.save(marca);
 		}
 		return marca;
+	}	
+	
+	public Categoria getCategoriaOuCria(String descricao) {
+		Categoria categoria = this.categoriaService.getPorDescricao(descricao);
+		if (categoria == null) {
+			categoria = new Categoria();
+			categoria.setDescricao(descricao);
+			this.categoriaService.save(categoria);
+		}
+		return categoria;
+	}		
+	
+	public Subcategoria getSubcategoriaOuCria(String descricao, Categoria categoria) {
+		Subcategoria subcategoria = this.subcategoriaService.getPorDescricao(descricao);
+		if (subcategoria == null) {
+			subcategoria = new Subcategoria();
+			subcategoria.setDescricao(descricao);
+			subcategoria.setCategoria(categoria);
+			this.subcategoriaService.save(subcategoria);
+		}
+		return subcategoria;
+	}	
+	
+	public Modelo getModeloOuCria(String descricao, Marca marca, Subcategoria subcategoria) {
+		Modelo modelo = this.modeloService.getPorDescricaoMarca(descricao, marca, subcategoria);
+		if (modelo == null) {
+			ModeloBuilder mb = new ModeloBuilder();
+			Modelo gol = mb.comDescricao(descricao)
+							.comMarca(marca)
+							.comSubcategoria(subcategoria)
+							.build();
+			this.modeloService.save(gol);
+		}
+		return modelo;
+	}			
+	
+	public Cambio getCambioOuCria(String descricao) {
+		Cambio cambio = this.cambioService.getPorDescricao(descricao);
+		if(cambio == null) {
+			cambio = new Cambio();
+			cambio.setDescricao(descricao);
+			this.cambioService.save(cambio);
+		}
+		return cambio;
+	}			
+	
+	public Combustivel getCombustivelOuCria(String descricao) {
+		Combustivel combustivel = this.combustivelService.getPorDescricao(descricao);
+		if (combustivel == null) {
+			combustivel = new Combustivel();
+			combustivel.setDescricao(descricao);
+			this.combustivelService.save(combustivel);
+		}
+		return combustivel;
+	}	
+		
+	public Versao getVersaoOuCria(String descricao, float motor, int anoFabricacao, int anoModelo, int quantidadePortas, Modelo modelo, Combustivel combustivel, Cambio cambio) {
+		// TODO
+		VersaoBuilder versaoBuilder = new VersaoBuilder();
+		Versao versao = versaoBuilder.comDescricao(descricao)
+									 .comMotor(motor)
+									 .comModelo(modelo)
+									 .comAnoFabricacao(2013)
+									 .comAnoModelo(2014)
+									 .comQuantidadePortas(4)
+									 .comCombustivel(combustivel)
+									 .comCambio(cambio)
+									 .build();
+		this.versaoService.save(versao);
+		return versao;
+	}	
+	
+	
+	public Cor getCorOuCria(String descricao) {
+		Cor cor = this.corService.getPorDescricao(descricao);
+		if(cor == null) {
+			cor = new Cor();
+			cor.setDescricao(descricao);
+			this.corService.save(cor);
+		}
+		return cor;
+	}	
+	
+	public Loja getLojaOuCria(String descricao) {
+		Loja loja = this.lojaService.getPorDescricao(descricao);
+		if(loja == null) {
+			LojaBuilder lb = new LojaBuilder();
+			loja = lb.comDescricao(descricao).getInstance();
+			this.lojaService.save(loja);
+		}
+		return loja;
+	}	
+
+	public Opcional getOpcionalOuCria(String descricao) {
+		Opcional opcional = this.opcionalService.getPorDescricao(descricao);
+		if(opcional == null) {
+			opcional = new Opcional();
+			opcional.setDescricao(descricao);
+			this.opcionalService.save(opcional);
+		}
+		return opcional;
 	}	
 	
 }

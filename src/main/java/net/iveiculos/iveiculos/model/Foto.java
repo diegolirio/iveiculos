@@ -1,0 +1,63 @@
+package net.iveiculos.iveiculos.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
+public class Foto extends Model {
+
+	@Id @GeneratedValue
+	private long id;
+	
+	private String uri;
+	
+	private boolean principal = false;
+	
+	@ManyToOne
+	private Veiculo veiculo;
+
+	public Foto() {}
+	
+	public Foto(long id, String uri, boolean principal, Veiculo veiculo) {
+		this.id = id;
+		this.uri = uri;
+		this.principal = principal;
+		this.veiculo = veiculo;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getUri() {
+		return uri;
+	}
+
+	public void setUri(String uri) {
+		this.uri = uri;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+	public boolean isPrincipal() {
+		return principal;
+	}
+
+	public void setPrincipal(boolean principal) {
+		this.principal = principal;
+	}
+	
+	
+}
