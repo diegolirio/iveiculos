@@ -1,5 +1,7 @@
 package net.iveiculos.iveiculos.dao;
 
+import java.util.List;
+
 import javax.persistence.NoResultException;
 
 import net.iveiculos.iveiculos.model.Marca;
@@ -24,6 +26,13 @@ public class ModeloDao extends AbstractGenericDao<Modelo> {
 		} catch (Exception e) {
 			throw new RuntimeException(e.getMessage() + " marca="+marca+";descricao="+descricao+";subcategoria="+subcategoria);
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Modelo> getListPagination(int firstResult, int maxResults) {
+		return (List<Modelo>) super.manager.createQuery("Select m from Modelo m ")
+				                           .setFirstResult(firstResult)
+				                           .setMaxResults(maxResults).getResultList();
 	}	
 
 }
