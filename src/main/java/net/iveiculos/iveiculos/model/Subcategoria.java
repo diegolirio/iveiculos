@@ -11,8 +11,8 @@ import javax.persistence.OneToMany;
 import org.codehaus.jackson.annotate.JsonBackReference;
 
 /**
- * @author desenv
- *
+ * @author Diego Lirio
+ * Subcategoria Ex: Pick-Up pequena (saveiro) e Pick-Up Grande (Hilux) | SUV Medio e SUV Grande
  */
 @Entity
 public class Subcategoria extends Model {
