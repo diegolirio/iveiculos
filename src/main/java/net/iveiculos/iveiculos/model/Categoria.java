@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * @autor Diego Lirio
+ * Categoria Ex: Pick-Up, SUV, Esportivo
+ */
 @Entity
 public class Categoria extends Model {
 
